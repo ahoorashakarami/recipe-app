@@ -1,9 +1,8 @@
-
-# Project Title
+# Recipe App
 
 
 ## About
-A React application for searching and discovering delicious recipes 🙂
+A React application for searching and discovering delicious recipes 🙂.
 Users can explore recipes, view detailed cooking instructions, and enjoy a clean, responsive interface.
 
 ## Technologies
