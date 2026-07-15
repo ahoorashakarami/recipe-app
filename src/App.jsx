@@ -3,14 +3,12 @@ import SearchBox from "./components/Searchbox";
 import RecipeModal from "./components/RecipeModal";
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   const handleSearch = async (term) => {
-    setSearchTerm(term);
     setRecipes([]);
     setError(null);
 
@@ -18,6 +16,7 @@ function App() {
       const res = await fetch(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
       );
+
       const data = await res.json();
 
       if (data.meals) {
@@ -35,10 +34,11 @@ function App() {
       className="bg-light text-dark"
       style={{
         minHeight: "100vh",
-        width: "100%",
       }}
     >
-      <h1 className="text-center mb-4 pt-5">Find Food Recipe 🍽️</h1>
+      <h1 className="text-center mb-4 pt-5">
+        Find Food Recipe 🍽️
+      </h1>
 
       <SearchBox onSearch={handleSearch} />
 
@@ -51,16 +51,18 @@ function App() {
       </div>
 
       <div className="container">
-        <div className="row mt-4">
+        <div className="row mt-4 justify-content-center">
           {recipes.map((meal) => (
             <div
-              className="col-md-4 mb-4"
-              style={{ maxWidth: "300px" }}
+              className="col-auto mb-4 d-flex justify-content-center"
               key={meal.idMeal}
             >
               <div
                 className="card h-100"
-                style={{ boxShadow: "0 0 4px #000" }}
+                style={{
+                  width: "300px",
+                  boxShadow: "0 0 4px rgba(0,0,0,.4)",
+                }}
               >
                 <img
                   src={meal.strMealThumb}
@@ -68,7 +70,7 @@ function App() {
                   alt={meal.strMeal}
                 />
 
-                <div className="card-body">
+                <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{meal.strMeal}</h5>
 
                   <p className="card-text">
@@ -76,7 +78,7 @@ function App() {
                   </p>
 
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary mt-auto"
                     onClick={() => {
                       setSelectedRecipe(meal);
                       setShowModal(true);
